@@ -14,7 +14,7 @@ func NewServer(app *fiber.App) *Server {
 }
 
 func (s *Server) StartServer() {
-	err := s.app.Listen(configuration.Port)
+	err := s.app.Listen(":" + configuration.Port)
 	if err != nil {
 		return
 	}

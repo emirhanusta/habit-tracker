@@ -12,8 +12,8 @@ func InitRouter(app *fiber.App, controller controller.IUserController) {
 	})
 
 	habitTracker := app.Group("/api/v1/habit-tracker")
+	habitTracker.Get("/user/email", controller.GetUserByEmail)
 	habitTracker.Get("/user/:userId", controller.GetUserById)
-	habitTracker.Get("/user/email/:email", controller.GetUserByEmail)
 	habitTracker.Post("/user", controller.Save)
 
 }

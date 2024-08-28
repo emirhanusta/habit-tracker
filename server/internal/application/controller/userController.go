@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"habit-tracker/internal/application/controller/request"
+	"habit-tracker/internal/application/controller/response"
 	"habit-tracker/internal/application/handler/user"
 	"habit-tracker/internal/application/query"
 	"net/http"
@@ -27,6 +28,21 @@ func NewUserController(userQueryService query.IUserQueryService, userCommandHand
 	}
 }
 
+// GetUserById godoc
+//
+//	@Summary		This method get user by given id
+//	@Description	get user by id
+//	@Tags			User
+//	@Accept			json
+//	@Produce		json
+//	@Param			userId	path		string	true	"userId"
+//
+// @Success 200 {object} response.UserResponse
+//
+//	@Failure		400
+//	@Failure		404
+//	@Failure		500
+//	@Router			/api/v1/habit-tracker/user/{userId} [get]
 func (u *userController) GetUserById(ctx *fiber.Ctx) error {
 	userId := ctx.Params("userId")
 
@@ -42,11 +58,26 @@ func (u *userController) GetUserById(ctx *fiber.Ctx) error {
 		return ctx.Status(http.StatusBadRequest).JSON(err.Error())
 	}
 
-	return ctx.Status(http.StatusOK).JSON(byId)
+	return ctx.Status(http.StatusOK).JSON(response.ToResponse(byId))
 }
 
+// GetUserByEmail godoc
+//
+//	@Summary		This method get user by given email
+//	@Description	get user by email
+//	@Tags			User
+//	@Accept			json
+//	@Produce		json
+//	@Param			email	path		string	true	"email"
+//
+// @Success 200 {object} response.UserResponse
+//
+//	@Failure		400
+//	@Failure		404
+//	@Failure		500
+//	@Router			/api/v1/habit-tracker/user/email [get]
 func (u *userController) GetUserByEmail(ctx *fiber.Ctx) error {
-	email := ctx.Params("email")
+	email := ctx.Query("email")
 
 	if email == "" {
 		return ctx.Status(http.StatusBadRequest).JSON("email is required")
@@ -60,9 +91,26 @@ func (u *userController) GetUserByEmail(ctx *fiber.Ctx) error {
 		return ctx.Status(http.StatusBadRequest).JSON(err.Error())
 	}
 
-	return ctx.Status(http.StatusOK).JSON(byEmail)
+	return ctx.Status(http.StatusOK).JSON(response.ToResponse(byEmail))
 }
 
+// Save godoc
+//
+//	@Summary		This method used for saving new user
+//	@Description	saving new user
+//
+// @Param requestBody body request.UserCreateRequest nil "Handle Request Body"
+//
+//	@Tags			User
+//	@Accept			json
+//	@Produce		json
+//
+// @Success 200
+//
+//	@Failure		400
+//	@Failure		404
+//	@Failure		500
+//	@Router			/api/v1/habit-tracker/user [post]
 func (u *userController) Save(ctx *fiber.Ctx) error {
 	var req request.UserCreateRequest
 

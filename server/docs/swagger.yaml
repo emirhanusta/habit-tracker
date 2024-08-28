@@ -1,0 +1,111 @@
+definitions:
+  request.UserCreateRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - password
+    - username
+    type: object
+  response.UserResponse:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      username:
+        type: string
+    type: object
+info:
+  contact:
+    email: emirhan1usta@gmail.com
+    name: emirhan usta
+  description: This is a sample swagger for Habit Tracker Fiber REST API
+  title: Habit Tracker Fiber REST API
+  version: "1.0"
+paths:
+  /api/v1/habit-tracker/user:
+    post:
+      consumes:
+      - application/json
+      description: saving new user
+      parameters:
+      - description: Handle Request Body
+        in: body
+        name: requestBody
+        schema:
+          $ref: '#/definitions/request.UserCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: This method used for saving new user
+      tags:
+      - User
+  /api/v1/habit-tracker/user/{userId}:
+    get:
+      consumes:
+      - application/json
+      description: get user by id
+      parameters:
+      - description: userId
+        in: query
+        name: userId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.UserResponse'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: This method get user by given id
+      tags:
+      - User
+  /api/v1/habit-tracker/user/email:
+    get:
+      consumes:
+      - application/json
+      description: get user by email
+      parameters:
+      - description: email
+        in: path
+        name: email
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.UserResponse'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: This method get user by given email
+      tags:
+      - User
+swagger: "2.0"
