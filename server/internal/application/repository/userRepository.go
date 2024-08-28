@@ -9,9 +9,9 @@ import (
 )
 
 type IUserRepository interface {
-	GetUserByID(id string) (*domain.User, error)
-	GetUserByEmail(email string) (*domain.User, error)
-	CreateUser(user domain.User) (*domain.User, error)
+	GetById(ctx context.Context, id string) (*domain.User, error)
+	GetUserByEmail(ctx context.Context, email string) (*domain.User, error)
+	SaveUser(ctx context.Context, user *domain.User) error
 }
 
 type userRepository struct {
@@ -24,48 +24,44 @@ func NewUserRepository(dbConn *pgx.Conn) IUserRepository {
 	}
 }
 
-func (u *userRepository) GetUserByID(id string) (*domain.User, error) {
+func (u *userRepository) GetById(ctx context.Context, id string) (*domain.User, error) {
 
-	c := context.Background()
-	getById := "SELECT * FROM users WHERE id = $1"
+	getById := `SELECT * FROM users WHERE id = $1`
 
-	queryRow := u.dbConn.QueryRow(c, getById, id)
+	queryRow := u.dbConn.QueryRow(ctx, getById, id)
 
 	var user domain.User
-	err := queryRow.Scan(&user.ID, &user.Email, &user.PasswordHash, &user.CreatedAt)
-	if err != nil && errors.Is(err, pgx.ErrNoRows) {
-		return &domain.User{}, errors.New(fmt.Sprint("Error getting user by id: ", err))
-	}
+	err := queryRow.Scan(&user.Id, &user.Username, &user.Email, &user.Password)
 	if err != nil {
-		return &domain.User{}, errors.New(fmt.Sprint("Error getting user by id: ", err))
+		fmt.Printf("Error getting user by id: %s\n", err)
+		return nil, err
 	}
 	return &user, nil
 }
 
-func (u *userRepository) GetUserByEmail(email string) (*domain.User, error) {
-	c := context.Background()
-	getByEmail := "SELECT * FROM USERS WHERE email = $1"
+func (u *userRepository) GetUserByEmail(ctx context.Context, email string) (*domain.User, error) {
+	getByEmail := `SELECT * FROM USERS WHERE email = $1`
 
-	queryRow := u.dbConn.QueryRow(c, getByEmail, email)
+	queryRow := u.dbConn.QueryRow(ctx, getByEmail, email)
 	var user domain.User
-	err := queryRow.Scan(&user.ID, &user.Email, &user.PasswordHash, &user.CreatedAt)
+	err := queryRow.Scan(&user.Id, &user.Username, &user.Email, &user.Password)
 	if err != nil && errors.Is(err, pgx.ErrNoRows) {
-		return &domain.User{}, errors.New(fmt.Sprint("Error getting user by id: ", err))
+		return &domain.User{}, errors.New(fmt.Sprint("Error getting user by id ", err))
 	}
 	if err != nil {
-		return &domain.User{}, errors.New(fmt.Sprint("Error getting user by id: ", err))
+		return &domain.User{}, errors.New(fmt.Sprint("Error getting user by id ", err))
 	}
 	return &user, nil
 
 }
 
-func (u *userRepository) CreateUser(user domain.User) (*domain.User, error) {
-	c := context.Background()
-	insertSql := "INSERT INTO users (id, email, password_hash, created_at) VALUES ($1, $2, $3, $4)"
+func (u *userRepository) SaveUser(ctx context.Context, user *domain.User) error {
 
-	_, err := u.dbConn.Exec(c, insertSql, user.ID, &user.Email, &user.PasswordHash, &user.CreatedAt)
+	insertSql := `INSERT INTO users (username, email, password) VALUES ($1, $2, $3)`
+
+	_, err := u.dbConn.Exec(ctx, insertSql, user.Username, &user.Email, &user.Password)
 	if err != nil {
-		return &domain.User{}, errors.New(fmt.Sprint("Error creating user: ", err))
+		return errors.New(fmt.Sprint("Error creating user: ", err))
 	}
-	return &user, nil
+	return nil
 }

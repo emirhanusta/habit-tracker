@@ -1,7 +1,6 @@
-package domain
+package user
 
-type User struct {
-	Id       string
+type Command struct {
 	Username string
 	Email    string
 	Password string

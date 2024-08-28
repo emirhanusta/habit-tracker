@@ -4,61 +4,36 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3fa55d91-5d4b-4c47-95e7-ef6dc84787cd" name="Changes" comment="edit project structure">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/eslint.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/vite.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/App.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/react.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/pages/SignInPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/vite-env.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/tsconfig.app.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/tsconfig.node.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/vite.config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/.idea/go.imports.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/.idea/habit-tracker.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/go.mod" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/go.sum" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/internal/application/controller/request/userCreateRequest.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/internal/application/controller/userController.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/internal/application/repository/userRepository.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/internal/domain/habit.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/internal/domain/reminder.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/internal/domain/user.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/internal/pkg/postgresql/postgresql.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/internal/pkg/server/server.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/go.imports.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/habit.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/reminder.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/user.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/pkg/postgresql/postgresql.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/pkg/server/server.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" />
+    <list default="true" id="3fa55d91-5d4b-4c47-95e7-ef6dc84787cd" name="Changes" comment="add user save and get operations">
+      <change afterPath="$PROJECT_DIR$/server/configuration/appConfig.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/internal/application/handler/user/command.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/internal/application/handler/user/commandHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/internal/application/query/userQueryService.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/internal/application/web/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/server/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/server/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/application/controller/request/userCreateRequest.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/controller/request/userCreateRequest.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/application/controller/userController.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/controller/userController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/application/repository/userRepository.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/repository/userRepository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/domain/habit.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/domain/habit.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/domain/reminder.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/domain/reminder.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/domain/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/domain/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/pkg/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/pkg/server/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
   </component>
   <component name="GOROOT" url="file://$PROJECT_DIR$/../../../../Program Files/Go" />
   <component name="Git.Settings">
@@ -81,6 +56,8 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;Go Build.go build habit-tracker.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
@@ -88,13 +65,39 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/emirh&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/emirh/Desktop/habit-tracker&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\emirh\\Desktop\\habit-tracker\\client\\node_modules\\typescript\\lib&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\emirh\Desktop\habit-tracker\server\internal\application" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="go build habit-tracker" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="habit-tracker" />
+      <working_directory value="$PROJECT_DIR$/server" />
+      <kind value="PACKAGE" />
+      <package value="habit-tracker" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/server/main.go" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build habit-tracker" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -110,7 +113,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="edit project structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit project structure" />
+    <MESSAGE value="add user save and get operations" />
+    <option name="LAST_COMMIT_MESSAGE" value="add user save and get operations" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

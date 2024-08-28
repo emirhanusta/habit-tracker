@@ -1,6 +1,9 @@
 package server
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/gofiber/fiber/v2"
+	"habit-tracker/configuration"
+)
 
 type Server struct {
 	app *fiber.App
@@ -11,7 +14,7 @@ func NewServer(app *fiber.App) *Server {
 }
 
 func (s *Server) StartServer() {
-	err := s.app.Listen(":8080")
+	err := s.app.Listen(configuration.Port)
 	if err != nil {
 		return
 	}
