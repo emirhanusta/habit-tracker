@@ -12,6 +12,22 @@ definitions:
     - password
     - username
     type: object
+  request.UserUpdateRequest:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - id
+    - password
+    - username
+    type: object
   response.UserResponse:
     properties:
       email:
@@ -30,6 +46,28 @@ info:
   version: "1.0"
 paths:
   /api/v1/habit-tracker/user:
+    get:
+      consumes:
+      - application/json
+      description: get all users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/response.UserResponse'
+            type: array
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: This method get all users
+      tags:
+      - User
     post:
       consumes:
       - application/json
@@ -54,14 +92,63 @@ paths:
       summary: This method used for saving new user
       tags:
       - User
+    put:
+      consumes:
+      - application/json
+      description: Update user
+      parameters:
+      - description: Handle Request Body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.UserUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Update user
+      tags:
+      - User
   /api/v1/habit-tracker/user/{userId}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete user by id
+      parameters:
+      - description: userId
+        in: path
+        name: userId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Delete user
+      tags:
+      - User
     get:
       consumes:
       - application/json
       description: get user by id
       parameters:
       - description: userId
-        in: query
+        in: path
         name: userId
         required: true
         type: string

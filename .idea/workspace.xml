@@ -5,25 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3fa55d91-5d4b-4c47-95e7-ef6dc84787cd" name="Changes" comment="add swagger implementation">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/6a8c9cb2-b4a1-4d1a-a5dd-ab20302c335c.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/6a8c9cb2-b4a1-4d1a-a5dd-ab20302c335c/storage_v2/_src_/database/habit-tracker-db.LI0y6A.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/6a8c9cb2-b4a1-4d1a-a5dd-ab20302c335c/storage_v2/_src_/database/habit-tracker-db.LI0y6A/schema/public.abK9xQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/swagger-settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/docs/docs.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/docs/swagger.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/docs/swagger.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/internal/application/controller/response/userResponse.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/internal/application/controller/request/userUpdateRequest.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/configuration/appConfig.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/configuration/appConfig.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/server/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/server/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/docs/docs.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/docs.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/docs/swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/swagger.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/docs/swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/swagger.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/application/controller/response/userResponse.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/controller/response/userResponse.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/internal/application/controller/userController.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/controller/userController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/application/handler/user/command.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/handler/user/command.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/application/handler/user/commandHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/handler/user/commandHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/application/query/userQueryService.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/query/userQueryService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/application/repository/userRepository.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/repository/userRepository.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/internal/application/web/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/web/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/internal/pkg/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/pkg/server/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,32 +48,32 @@
     <option name="openDirectoriesWithSingleClick" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultGoTemplateProperty": "Go File",
-    "Go Build.go build habit-tracker.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "C:/Users/emirh/Desktop/habit-tracker",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\emirh\\Desktop\\habit-tracker\\client\\node_modules\\typescript\\lib"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;Go Build.go build habit-tracker.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/emirh/Desktop/habit-tracker&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\emirh\\Desktop\\habit-tracker\\client\\node_modules\\typescript\\lib&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\emirh\Desktop\habit-tracker\server\internal\application" />

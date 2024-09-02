@@ -8,6 +8,7 @@ import (
 )
 
 type IUserQueryService interface {
+	GetAll(context context.Context) ([]domain.User, error)
 	GetById(context context.Context, id string) (*domain.User, error)
 	GetByEmail(context context.Context, email string) (*domain.User, error)
 }
@@ -22,6 +23,15 @@ func NewUserQueryService(userRepository repository.IUserRepository) IUserQuerySe
 	}
 }
 
+func (u *userQueryService) GetAll(ctx context.Context) ([]domain.User, error) {
+	users, err := u.userRepository.GetAll(ctx)
+	if err != nil {
+		return nil, err
+	}
+	fmt.Printf("userQueryService.GetAll Started\n")
+
+	return users, nil
+}
 func (u *userQueryService) GetById(ctx context.Context, id string) (*domain.User, error) {
 	user, err := u.userRepository.GetById(ctx, id)
 
@@ -40,6 +50,6 @@ func (u *userQueryService) GetByEmail(ctx context.Context, email string) (*domai
 	if err != nil {
 		return nil, err
 	}
-
+	fmt.Printf("userQueryService.GetByEmail Started with email: %s\n", email)
 	return user, nil
 }

@@ -11,9 +11,12 @@ import (
 )
 
 type IUserController interface {
+	GetAllUsers(ctx *fiber.Ctx) error
 	GetUserById(ctx *fiber.Ctx) error
 	GetUserByEmail(ctx *fiber.Ctx) error
-	Save(ctx *fiber.Ctx) error
+	SaveUser(ctx *fiber.Ctx) error
+	UpdateUser(ctx *fiber.Ctx) error
+	DeleteUser(ctx *fiber.Ctx) error
 }
 
 type userController struct {
@@ -26,6 +29,30 @@ func NewUserController(userQueryService query.IUserQueryService, userCommandHand
 		userQueryService:   userQueryService,
 		userCommandHandler: userCommandHandler,
 	}
+}
+
+// GetAllUsers godoc
+//
+//	@Summary		This method get all users
+//	@Description	get all users
+//	@Tags			User
+//	@Accept			json
+//	@Produce		json
+//
+// @Success 200 {object} []response.UserResponse
+//
+//	@Failure		400
+//	@Failure		404
+//	@Failure		500
+//	@Router			/api/v1/habit-tracker/user [get]
+func (u *userController) GetAllUsers(ctx *fiber.Ctx) error {
+	users, err := u.userQueryService.GetAll(ctx.UserContext())
+
+	if err != nil {
+		return ctx.Status(http.StatusBadRequest).JSON(err.Error())
+	}
+
+	return ctx.Status(http.StatusOK).JSON(response.ToResponseList(users))
 }
 
 // GetUserById godoc
@@ -111,7 +138,7 @@ func (u *userController) GetUserByEmail(ctx *fiber.Ctx) error {
 //	@Failure		404
 //	@Failure		500
 //	@Router			/api/v1/habit-tracker/user [post]
-func (u *userController) Save(ctx *fiber.Ctx) error {
+func (u *userController) SaveUser(ctx *fiber.Ctx) error {
 	var req request.UserCreateRequest
 
 	if err := ctx.BodyParser(&req); err != nil {
@@ -126,4 +153,61 @@ func (u *userController) Save(ctx *fiber.Ctx) error {
 	}
 
 	return ctx.Status(http.StatusCreated).JSON("User created successfully")
+}
+
+// UpdateUser godoc
+// @Summary Update user
+// @Description Update user
+// @Tags User
+// @Accept json
+// @Produce json
+// @Param requestBody body request.UserUpdateRequest true "Handle Request Body"
+// @Success 201
+// @Failure 400
+// @Failure 404
+// @Failure 500
+// @Router /api/v1/habit-tracker/user [put]
+func (u *userController) UpdateUser(ctx *fiber.Ctx) error {
+	var req request.UserUpdateRequest
+
+	if err := ctx.BodyParser(&req); err != nil {
+		fmt.Printf("userController.Update Error: %v\n", err)
+		return err
+
+	}
+	fmt.Printf("userController.Update Started with request: %v\n", req)
+
+	if err := u.userCommandHandler.Update(ctx.UserContext(), req.ToCommand()); err != nil {
+		return ctx.Status(http.StatusBadRequest).JSON(err.Error())
+	}
+
+	return ctx.Status(http.StatusCreated).JSON("User updated successfully")
+}
+
+// DeleteUser godoc
+// @Summary Delete user
+// @Description Delete user by id
+// @Tags User
+// @Accept json
+// @Produce json
+// @Param userId path string true "userId"
+// @Success 200
+// @Failure 400
+// @Failure 404
+// @Failure 500
+// @Router /api/v1/habit-tracker/user/{userId} [delete]
+func (u *userController) DeleteUser(ctx *fiber.Ctx) error {
+	userId := ctx.Params("userId")
+
+	if userId == "" {
+		return ctx.Status(http.StatusBadRequest).JSON("userId is required")
+	}
+
+	fmt.Printf("userController.DeleteUser Started with userId: %s\n", userId)
+
+	if err := u.userCommandHandler.Delete(ctx.UserContext(), userId); err != nil {
+		return ctx.Status(http.StatusBadRequest).JSON(err.Error())
+	}
+
+	return ctx.Status(http.StatusOK).JSON("User deleted successfully")
 }

@@ -15,3 +15,13 @@ func ToResponse(user *domain.User) UserResponse {
 		Email:    user.Email,
 	}
 }
+
+func ToResponseList(users []domain.User) []UserResponse {
+	var response []UserResponse
+
+	for _, user := range users {
+		response = append(response, ToResponse(&user))
+	}
+
+	return response
+}
