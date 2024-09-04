@@ -9,8 +9,8 @@ type UserUpdateRequest struct {
 	Password string `json:"password" validate:"required"`
 }
 
-func (u *UserUpdateRequest) ToCommand() user.Command {
-	return user.Command{
+func (u *UserUpdateRequest) ToCommand() user.UpdateCommand {
+	return user.UpdateCommand{
 		Id:       u.Id,
 		Username: u.Username,
 		Email:    u.Email,

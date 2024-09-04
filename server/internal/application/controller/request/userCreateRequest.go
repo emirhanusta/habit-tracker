@@ -8,8 +8,8 @@ type UserCreateRequest struct {
 	Password string `json:"password" validate:"required"`
 }
 
-func (u *UserCreateRequest) ToCommand() user.Command {
-	return user.Command{
+func (u *UserCreateRequest) ToCommand() user.CreateCommand {
+	return user.CreateCommand{
 		Username: u.Username,
 		Email:    u.Email,
 		Password: u.Password,

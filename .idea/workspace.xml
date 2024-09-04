@@ -4,19 +4,12 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3fa55d91-5d4b-4c47-95e7-ef6dc84787cd" name="Changes" comment="add swagger implementation">
-      <change afterPath="$PROJECT_DIR$/server/internal/application/controller/request/userUpdateRequest.go" afterDir="false" />
+    <list default="true" id="3fa55d91-5d4b-4c47-95e7-ef6dc84787cd" name="Changes" comment="complete user crud operations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/docs/docs.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/docs.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/docs/swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/swagger.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/docs/swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/swagger.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/internal/application/controller/response/userResponse.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/controller/response/userResponse.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/internal/application/controller/userController.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/controller/userController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/application/controller/request/userCreateRequest.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/controller/request/userCreateRequest.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/application/controller/request/userUpdateRequest.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/controller/request/userUpdateRequest.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/internal/application/handler/user/command.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/handler/user/command.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/internal/application/handler/user/commandHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/handler/user/commandHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/internal/application/query/userQueryService.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/query/userQueryService.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/internal/application/repository/userRepository.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/repository/userRepository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/internal/application/web/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/web/router.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +105,8 @@
     <MESSAGE value="edit project structure" />
     <MESSAGE value="add user save and get operations" />
     <MESSAGE value="add swagger implementation" />
-    <option name="LAST_COMMIT_MESSAGE" value="add swagger implementation" />
+    <MESSAGE value="complete user crud operations" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete user crud operations" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

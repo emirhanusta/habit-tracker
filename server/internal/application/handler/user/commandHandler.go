@@ -8,8 +8,8 @@ import (
 )
 
 type ICommandHandler interface {
-	Save(ctx context.Context, command Command) error
-	Update(ctx context.Context, command Command) error
+	Save(ctx context.Context, command CreateCommand) error
+	Update(ctx context.Context, command UpdateCommand) error
 	Delete(ctx context.Context, id string) error
 }
 
@@ -23,16 +23,16 @@ func NewCommandHandler(userRepository repository.IUserRepository) ICommandHandle
 	}
 }
 
-func (c *commandHandler) Update(ctx context.Context, command Command) error {
-	if err := c.userRepository.UpdateUser(ctx, c.BuildEntity(command)); err != nil {
+func (c *commandHandler) Update(ctx context.Context, command UpdateCommand) error {
+	if err := c.userRepository.UpdateUser(ctx, c.buildEntityUpdate(command)); err != nil {
 		return err
 	}
 	fmt.Printf("commandHandler.Update Started with username: %s\n", command.Username)
 	return nil
 }
 
-func (c *commandHandler) Save(ctx context.Context, command Command) error {
-	if err := c.userRepository.SaveUser(ctx, c.BuildEntity(command)); err != nil {
+func (c *commandHandler) Save(ctx context.Context, command CreateCommand) error {
+	if err := c.userRepository.SaveUser(ctx, c.buildEntityCreate(command)); err != nil {
 		return err
 	}
 	fmt.Printf("commandHandler.Save Started with username: %s\n", command.Username)
@@ -47,7 +47,15 @@ func (c *commandHandler) Delete(ctx context.Context, id string) error {
 	return nil
 }
 
-func (c *commandHandler) BuildEntity(command Command) *domain.User {
+func (c *commandHandler) buildEntityCreate(command CreateCommand) *domain.User {
+	return &domain.User{
+		Username: command.Username,
+		Email:    command.Email,
+		Password: command.Password,
+	}
+}
+
+func (c *commandHandler) buildEntityUpdate(command UpdateCommand) *domain.User {
 	return &domain.User{
 		Id:       command.Id,
 		Username: command.Username,
