@@ -11,10 +11,10 @@ import (
 type IUserRepository interface {
 	GetAll(ctx context.Context) ([]domain.User, error)
 	GetById(ctx context.Context, id string) (*domain.User, error)
-	GetUserByEmail(ctx context.Context, email string) (*domain.User, error)
-	SaveUser(ctx context.Context, user *domain.User) error
-	UpdateUser(ctx context.Context, user *domain.User) error
-	DeleteUser(ctx context.Context, id string) error
+	GetByEmail(ctx context.Context, email string) (*domain.User, error)
+	Save(ctx context.Context, user *domain.User) error
+	Update(ctx context.Context, user *domain.User) error
+	Delete(ctx context.Context, id string) error
 }
 
 type userRepository struct {
@@ -24,20 +24,6 @@ type userRepository struct {
 func NewUserRepository(dbConn *pgx.Conn) IUserRepository {
 	return &userRepository{
 		dbConn: dbConn,
-	}
-}
-
-func (u *userRepository) UpdateUser(ctx context.Context, user *domain.User) error {
-
-	if user.Email != "" && user.Username != "" && user.Password != "" {
-		updateSql := `UPDATE users SET username = $1, email = $2, password = $3 WHERE id = $4`
-		_, err := u.dbConn.Exec(ctx, updateSql, user.Username, user.Email, user.Password, user.Id)
-		if err != nil {
-			return errors.New(fmt.Sprint("Error updating user: ", err))
-		}
-		return nil
-	} else {
-		return errors.New(fmt.Sprint("Error updating user: ", "Missing fields"))
 	}
 }
 
@@ -81,7 +67,7 @@ func (u *userRepository) GetById(ctx context.Context, id string) (*domain.User, 
 	return &user, nil
 }
 
-func (u *userRepository) GetUserByEmail(ctx context.Context, email string) (*domain.User, error) {
+func (u *userRepository) GetByEmail(ctx context.Context, email string) (*domain.User, error) {
 
 	getByEmail := `SELECT * FROM USERS WHERE email = $1`
 
@@ -101,7 +87,7 @@ func (u *userRepository) GetUserByEmail(ctx context.Context, email string) (*dom
 
 }
 
-func (u *userRepository) SaveUser(ctx context.Context, user *domain.User) error {
+func (u *userRepository) Save(ctx context.Context, user *domain.User) error {
 
 	insertSql := `INSERT INTO users (username, email, password) VALUES ($1, $2, $3)`
 
@@ -112,7 +98,21 @@ func (u *userRepository) SaveUser(ctx context.Context, user *domain.User) error 
 	return nil
 }
 
-func (u *userRepository) DeleteUser(ctx context.Context, id string) error {
+func (u *userRepository) Update(ctx context.Context, user *domain.User) error {
+
+	if user.Email != "" && user.Username != "" && user.Password != "" {
+		updateSql := `UPDATE users SET username = $1, email = $2, password = $3 WHERE id = $4`
+		_, err := u.dbConn.Exec(ctx, updateSql, user.Username, user.Email, user.Password, user.Id)
+		if err != nil {
+			return errors.New(fmt.Sprint("Error updating user: ", err))
+		}
+		return nil
+	} else {
+		return errors.New(fmt.Sprint("Error updating user: ", "Missing fields"))
+	}
+}
+
+func (u *userRepository) Delete(ctx context.Context, id string) error {
 	deleteSql := `DELETE FROM users WHERE id = $1`
 
 	_, err := u.dbConn.Exec(ctx, deleteSql, id)

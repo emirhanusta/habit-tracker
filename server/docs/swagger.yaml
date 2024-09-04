@@ -1,4 +1,22 @@
 definitions:
+  request.HabitCreateRequest:
+    properties:
+      description:
+        type: string
+      name:
+        type: string
+      userId:
+        type: string
+    type: object
+  request.HabitUpdateRequest:
+    properties:
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
   request.UserCreateRequest:
     properties:
       email:
@@ -28,6 +46,17 @@ definitions:
     - password
     - username
     type: object
+  response.HabitResponse:
+    properties:
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      userId:
+        type: string
+    type: object
   response.UserResponse:
     properties:
       email:
@@ -45,7 +74,165 @@ info:
   title: Habit Tracker Fiber REST API
   version: "1.0"
 paths:
-  /api/v1/habit-tracker/user:
+  /api/v1/habit:
+    post:
+      consumes:
+      - application/json
+      description: save habit
+      parameters:
+      - description: habit
+        in: body
+        name: habit
+        required: true
+        schema:
+          $ref: '#/definitions/request.HabitCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: This method save habit
+      tags:
+      - Habit
+    put:
+      consumes:
+      - application/json
+      description: update habit
+      parameters:
+      - description: Handle Request Body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.HabitUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: This method update habit
+      tags:
+      - Habit
+  /api/v1/habit-tracker/user/email:
+    get:
+      consumes:
+      - application/json
+      description: get user by email
+      parameters:
+      - description: email
+        in: path
+        name: email
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.UserResponse'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: This method get user by given email
+      tags:
+      - User
+  /api/v1/habit/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete habit by id
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: This method delete habit by id
+      tags:
+      - Habit
+    get:
+      consumes:
+      - application/json
+      description: get habit by id
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.HabitResponse'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: This method get habit by given id
+      tags:
+      - Habit
+  /api/v1/habit/user/{userId}:
+    get:
+      consumes:
+      - application/json
+      description: get all habits by given user id
+      parameters:
+      - description: userId
+        in: path
+        name: userId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/response.HabitResponse'
+            type: array
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: This method get all habits by given user id
+      tags:
+      - Habit
+  /api/v1/user:
     get:
       consumes:
       - application/json
@@ -117,7 +304,7 @@ paths:
       summary: Update user
       tags:
       - User
-  /api/v1/habit-tracker/user/{userId}:
+  /api/v1/user/{userId}:
     delete:
       consumes:
       - application/json
@@ -166,33 +353,6 @@ paths:
         "500":
           description: Internal Server Error
       summary: This method get user by given id
-      tags:
-      - User
-  /api/v1/habit-tracker/user/email:
-    get:
-      consumes:
-      - application/json
-      description: get user by email
-      parameters:
-      - description: email
-        in: path
-        name: email
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/response.UserResponse'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-        "500":
-          description: Internal Server Error
-      summary: This method get user by given email
       tags:
       - User
 swagger: "2.0"

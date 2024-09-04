@@ -5,9 +5,9 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/swagger"
-	"habit-tracker/configuration"
 	_ "habit-tracker/docs"
 	"habit-tracker/internal/application/controller"
+	"habit-tracker/internal/application/handler/habit"
 	"habit-tracker/internal/application/handler/user"
 	"habit-tracker/internal/application/query"
 	"habit-tracker/internal/application/repository"
@@ -33,31 +33,28 @@ func main() {
 		fmt.Println(err)
 	}
 
-	// Create a new user repository
+	// Create a user controller
 	userRepository := repository.NewUserRepository(dbConn)
-
-	// Create a new user query service
 	userQueryService := query.NewUserQueryService(userRepository)
-
-	// Create a new user command handler
 	userCommandHandler := user.NewCommandHandler(userRepository)
-
-	// Create a new user controller
 	userController := controller.NewUserController(userQueryService, userCommandHandler)
 
-	web.InitRouter(app, userController)
+	// Create a habit controller
+	habitRepository := repository.NewHabitRepository(dbConn)
+	habitQueryService := query.NewHabitQueryService(habitRepository)
+	habitCommandHandler := habit.NewCommandHandler(habitRepository)
+	habitController := controller.NewHabitController(habitQueryService, habitCommandHandler)
+
+	web.InitRouter(app, userController, habitController)
 
 	server.NewServer(app).StartServer()
 }
 
 func configureSwaggerUi(app *fiber.App) {
-	if configuration.Env != "prod" {
-		// Swagger injection
-		app.Get("/swagger/*", swagger.HandlerDefault)
-
-		// Root path to SwaggerUI redirection
-		app.Get("/", func(ctx *fiber.Ctx) error {
-			return ctx.Status(fiber.StatusMovedPermanently).Redirect("/swagger/index.html")
-		})
-	}
+	// Swagger injection
+	app.Get("/swagger/*", swagger.HandlerDefault)
+	// Root path to SwaggerUI redirection
+	app.Get("/", func(ctx *fiber.Ctx) error {
+		return ctx.Status(fiber.StatusMovedPermanently).Redirect("/swagger/index.html")
+	})
 }

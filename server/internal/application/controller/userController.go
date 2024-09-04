@@ -44,7 +44,7 @@ func NewUserController(userQueryService query.IUserQueryService, userCommandHand
 //	@Failure		400
 //	@Failure		404
 //	@Failure		500
-//	@Router			/api/v1/habit-tracker/user [get]
+//	@Router			/api/v1/user [get]
 func (u *userController) GetAllUsers(ctx *fiber.Ctx) error {
 	users, err := u.userQueryService.GetAll(ctx.UserContext())
 
@@ -52,7 +52,7 @@ func (u *userController) GetAllUsers(ctx *fiber.Ctx) error {
 		return ctx.Status(http.StatusBadRequest).JSON(err.Error())
 	}
 
-	return ctx.Status(http.StatusOK).JSON(response.ToResponseList(users))
+	return ctx.Status(http.StatusOK).JSON(response.ToUserResponseList(users))
 }
 
 // GetUserById godoc
@@ -62,14 +62,14 @@ func (u *userController) GetAllUsers(ctx *fiber.Ctx) error {
 //	@Tags			User
 //	@Accept			json
 //	@Produce		json
-//	@Param			userId	path		string	true	"userId"
+//	@Param			id	path		string	true	"id"
 //
 // @Success 200 {object} response.UserResponse
 //
 //	@Failure		400
 //	@Failure		404
 //	@Failure		500
-//	@Router			/api/v1/habit-tracker/user/{userId} [get]
+//	@Router			/api/v1/user/{id} [get]
 func (u *userController) GetUserById(ctx *fiber.Ctx) error {
 	userId := ctx.Params("userId")
 
@@ -85,7 +85,7 @@ func (u *userController) GetUserById(ctx *fiber.Ctx) error {
 		return ctx.Status(http.StatusBadRequest).JSON(err.Error())
 	}
 
-	return ctx.Status(http.StatusOK).JSON(response.ToResponse(byId))
+	return ctx.Status(http.StatusOK).JSON(response.ToUserResponse(byId))
 }
 
 // GetUserByEmail godoc
@@ -118,10 +118,10 @@ func (u *userController) GetUserByEmail(ctx *fiber.Ctx) error {
 		return ctx.Status(http.StatusBadRequest).JSON(err.Error())
 	}
 
-	return ctx.Status(http.StatusOK).JSON(response.ToResponse(byEmail))
+	return ctx.Status(http.StatusOK).JSON(response.ToUserResponse(byEmail))
 }
 
-// Save godoc
+// SaveUser godoc
 //
 //	@Summary		This method used for saving new user
 //	@Description	saving new user
@@ -137,7 +137,7 @@ func (u *userController) GetUserByEmail(ctx *fiber.Ctx) error {
 //	@Failure		400
 //	@Failure		404
 //	@Failure		500
-//	@Router			/api/v1/habit-tracker/user [post]
+//	@Router			/api/v1/user [post]
 func (u *userController) SaveUser(ctx *fiber.Ctx) error {
 	var req request.UserCreateRequest
 
@@ -166,7 +166,7 @@ func (u *userController) SaveUser(ctx *fiber.Ctx) error {
 // @Failure 400
 // @Failure 404
 // @Failure 500
-// @Router /api/v1/habit-tracker/user [put]
+// @Router /api/v1/user [put]
 func (u *userController) UpdateUser(ctx *fiber.Ctx) error {
 	var req request.UserUpdateRequest
 
@@ -190,12 +190,12 @@ func (u *userController) UpdateUser(ctx *fiber.Ctx) error {
 // @Tags User
 // @Accept json
 // @Produce json
-// @Param userId path string true "userId"
+// @Param id path string true "id"
 // @Success 200
 // @Failure 400
 // @Failure 404
 // @Failure 500
-// @Router /api/v1/habit-tracker/user/{userId} [delete]
+// @Router /api/v1/user/{id} [delete]
 func (u *userController) DeleteUser(ctx *fiber.Ctx) error {
 	userId := ctx.Params("userId")
 

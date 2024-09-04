@@ -45,7 +45,7 @@ func (u *userQueryService) GetById(ctx context.Context, id string) (*domain.User
 }
 
 func (u *userQueryService) GetByEmail(ctx context.Context, email string) (*domain.User, error) {
-	user, err := u.userRepository.GetUserByEmail(ctx, email)
+	user, err := u.userRepository.GetByEmail(ctx, email)
 
 	if err != nil {
 		return nil, err

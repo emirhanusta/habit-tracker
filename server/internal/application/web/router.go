@@ -6,16 +6,23 @@ import (
 	"net/http"
 )
 
-func InitRouter(app *fiber.App, controller controller.IUserController) {
+func InitRouter(app *fiber.App, userController controller.IUserController, habitController controller.IHabitController) {
 	app.Get("/healthcheck", func(ctx *fiber.Ctx) error {
 		return ctx.Status(http.StatusOK).JSON("OK")
 	})
 
-	habitTracker := app.Group("/api/v1/habit-tracker")
-	habitTracker.Get("/user", controller.GetAllUsers)
-	habitTracker.Get("/user/email", controller.GetUserByEmail)
-	habitTracker.Get("/user/:userId", controller.GetUserById)
-	habitTracker.Post("/user", controller.SaveUser)
-	habitTracker.Put("/user", controller.UpdateUser)
-	habitTracker.Delete("/user/:userId", controller.DeleteUser)
+	user := app.Group("/api/v1/user")
+	user.Get("/", userController.GetAllUsers)
+	user.Get("/email", userController.GetUserByEmail)
+	user.Get("/:id", userController.GetUserById)
+	user.Post("/", userController.SaveUser)
+	user.Put("/", userController.UpdateUser)
+	user.Delete("/:id", userController.DeleteUser)
+
+	habit := app.Group("/api/v1/habit")
+	habit.Get("/user/:userId", habitController.GetAllHabitsByUserId)
+	habit.Get("/:id", habitController.GetHabitById)
+	habit.Post("/", habitController.SaveHabit)
+	habit.Put("/", habitController.UpdateHabit)
+	habit.Delete("/:id", habitController.DeleteHabit)
 }

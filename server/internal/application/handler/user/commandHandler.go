@@ -23,24 +23,24 @@ func NewCommandHandler(userRepository repository.IUserRepository) ICommandHandle
 	}
 }
 
-func (c *commandHandler) Update(ctx context.Context, command UpdateCommand) error {
-	if err := c.userRepository.UpdateUser(ctx, c.buildEntityUpdate(command)); err != nil {
-		return err
-	}
-	fmt.Printf("commandHandler.Update Started with username: %s\n", command.Username)
-	return nil
-}
-
 func (c *commandHandler) Save(ctx context.Context, command CreateCommand) error {
-	if err := c.userRepository.SaveUser(ctx, c.buildEntityCreate(command)); err != nil {
+	if err := c.userRepository.Save(ctx, c.buildEntityCreate(command)); err != nil {
 		return err
 	}
 	fmt.Printf("commandHandler.Save Started with username: %s\n", command.Username)
 	return nil
 }
 
+func (c *commandHandler) Update(ctx context.Context, command UpdateCommand) error {
+	if err := c.userRepository.Update(ctx, c.buildEntityUpdate(command)); err != nil {
+		return err
+	}
+	fmt.Printf("commandHandler.Update Started with username: %s\n", command.Username)
+	return nil
+}
+
 func (c *commandHandler) Delete(ctx context.Context, id string) error {
-	if err := c.userRepository.DeleteUser(ctx, id); err != nil {
+	if err := c.userRepository.Delete(ctx, id); err != nil {
 		return err
 	}
 	fmt.Printf("commandHandler.Delete Started with id: %s\n", id)
