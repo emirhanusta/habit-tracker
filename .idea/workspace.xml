@@ -4,26 +4,36 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3fa55d91-5d4b-4c47-95e7-ef6dc84787cd" name="Changes" comment="fix! complete user crud operations">
-      <change afterPath="$PROJECT_DIR$/server/internal/application/controller/habitController.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/internal/application/controller/request/habitCreateRequest.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/internal/application/controller/request/habitUpdateRequest.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/internal/application/controller/response/habitResponse.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/internal/application/handler/habit/command.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/internal/application/handler/habit/commandHandler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/internal/application/query/habitQueryService.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/internal/application/repository/habitRepository.go" afterDir="false" />
+    <list default="true" id="3fa55d91-5d4b-4c47-95e7-ef6dc84787cd" name="Changes" comment="complete habit crud operations">
+      <change afterPath="$PROJECT_DIR$/server/configuration/secrets.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/infra-setup/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/infra-setup/events/remiandAt/consumer.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/infra-setup/events/remiandAt/producer.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/internal/application/controller/reminderController.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/internal/application/controller/request/habitRequest.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/internal/application/controller/request/reminderRequest.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/internal/application/controller/request/userRequest.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/internal/application/controller/response/reminderResponse.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/internal/application/handler/reminder/command.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/internal/application/handler/reminder/commandHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/internal/application/query/reminderQueryService.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/internal/application/repository/reminderRepository.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/configuration/appConfig.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/configuration/appConfig.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/docs/docs.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/docs.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/docs/swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/swagger.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/docs/swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/swagger.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/internal/application/controller/response/userResponse.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/controller/response/userResponse.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/internal/application/controller/userController.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/controller/userController.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/internal/application/handler/user/commandHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/handler/user/commandHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/internal/application/query/userQueryService.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/query/userQueryService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/server/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/server/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/application/controller/request/habitCreateRequest.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/application/controller/request/habitUpdateRequest.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/application/controller/request/userCreateRequest.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/application/controller/request/userUpdateRequest.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/application/repository/habitRepository.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/repository/habitRepository.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/internal/application/repository/userRepository.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/repository/userRepository.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/internal/application/web/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/application/web/router.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/internal/domain/reminder.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/domain/reminder.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/internal/pkg/postgresql/postgresql.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/internal/pkg/postgresql/postgresql.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,6 +94,10 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\emirh\Desktop\habit-tracker\server\internal\application\controller\request" />
+      <recent name="C:\Users\emirh\Desktop\habit-tracker\server\internal\application\controller\request\reminder" />
+      <recent name="C:\Users\emirh\Desktop\habit-tracker\server\internal\application\controller\request\habit" />
+      <recent name="C:\Users\emirh\Desktop\habit-tracker\server\internal\application\controller\request\user" />
       <recent name="C:\Users\emirh\Desktop\habit-tracker\server\internal\application" />
     </key>
   </component>
@@ -122,25 +136,10 @@
     <MESSAGE value="add swagger implementation" />
     <MESSAGE value="complete user crud operations" />
     <MESSAGE value="fix! complete user crud operations" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix! complete user crud operations" />
+    <MESSAGE value="complete habit crud operations" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete habit crud operations" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/server/internal/application/controller/habitController.go</url>
-          <line>73</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/server/internal/application/controller/habitController.go</url>
-          <line>76</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

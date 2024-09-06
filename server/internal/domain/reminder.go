@@ -6,7 +6,7 @@ import (
 
 type Reminder struct {
 	Id       string
-	HabitID  string
+	HabitId  string
 	RemindAt time.Time
 	Message  string
 }

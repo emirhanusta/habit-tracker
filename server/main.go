@@ -5,9 +5,11 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/swagger"
+	"habit-tracker/configuration"
 	_ "habit-tracker/docs"
 	"habit-tracker/internal/application/controller"
 	"habit-tracker/internal/application/handler/habit"
+	"habit-tracker/internal/application/handler/reminder"
 	"habit-tracker/internal/application/handler/user"
 	"habit-tracker/internal/application/query"
 	"habit-tracker/internal/application/repository"
@@ -28,7 +30,8 @@ func main() {
 
 	configureSwaggerUi(app)
 	// Connect to Postgres
-	dbConn, err := postgresql.ConnectPostgres("postgres", "postgres", "localhost", "5432", "habit-tracker-db")
+	dbConn, err := postgresql.ConnectPostgres(configuration.PostgresUsername, configuration.PostgresPassword,
+		configuration.PostgresqlHost, configuration.PostgresqlPort, configuration.PostgresqlDbName)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -45,7 +48,13 @@ func main() {
 	habitCommandHandler := habit.NewCommandHandler(habitRepository)
 	habitController := controller.NewHabitController(habitQueryService, habitCommandHandler)
 
-	web.InitRouter(app, userController, habitController)
+	// Create a habit controller
+	reminderRepository := repository.NewReminderRepository(dbConn)
+	reminderQueryService := query.NewReminderQueryService(reminderRepository)
+	reminderCommandHandler := reminder.NewCommandHandler(reminderRepository)
+	reminderController := controller.NewReminderController(reminderQueryService, reminderCommandHandler)
+
+	web.InitRouter(app, userController, habitController, reminderController)
 
 	server.NewServer(app).StartServer()
 }

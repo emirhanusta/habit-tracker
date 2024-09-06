@@ -6,9 +6,10 @@ import (
 	"net/http"
 )
 
-func InitRouter(app *fiber.App, userController controller.IUserController, habitController controller.IHabitController) {
+func InitRouter(app *fiber.App, userController controller.IUserController, habitController controller.IHabitController,
+	reminderController controller.IReminderController) {
 	app.Get("/healthcheck", func(ctx *fiber.Ctx) error {
-		return ctx.Status(http.StatusOK).JSON("OK")
+		return ctx.Status(http.StatusOK).JSON("Server is up and running")
 	})
 
 	user := app.Group("/api/v1/user")
@@ -25,4 +26,11 @@ func InitRouter(app *fiber.App, userController controller.IUserController, habit
 	habit.Post("/", habitController.SaveHabit)
 	habit.Put("/", habitController.UpdateHabit)
 	habit.Delete("/:id", habitController.DeleteHabit)
+
+	reminder := app.Group("/api/v1/reminder")
+	reminder.Get("/habit/:habitId", reminderController.GetAllRemindersByHabitId)
+	reminder.Get("/:id", reminderController.GetReminderById)
+	reminder.Post("/", reminderController.SaveReminder)
+	reminder.Put("/", reminderController.UpdateReminder)
+	reminder.Delete("/:id", reminderController.DeleteReminder)
 }

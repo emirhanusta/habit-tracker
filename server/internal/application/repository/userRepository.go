@@ -100,6 +100,12 @@ func (u *userRepository) Save(ctx context.Context, user *domain.User) error {
 
 func (u *userRepository) Update(ctx context.Context, user *domain.User) error {
 
+	_, err := u.GetById(ctx, user.Id)
+
+	if err != nil {
+		return err
+	}
+
 	if user.Email != "" && user.Username != "" && user.Password != "" {
 		updateSql := `UPDATE users SET username = $1, email = $2, password = $3 WHERE id = $4`
 		_, err := u.dbConn.Exec(ctx, updateSql, user.Username, user.Email, user.Password, user.Id)
@@ -113,9 +119,15 @@ func (u *userRepository) Update(ctx context.Context, user *domain.User) error {
 }
 
 func (u *userRepository) Delete(ctx context.Context, id string) error {
+
+	_, err := u.GetById(ctx, id)
+
+	if err != nil {
+		return err
+	}
 	deleteSql := `DELETE FROM users WHERE id = $1`
 
-	_, err := u.dbConn.Exec(ctx, deleteSql, id)
+	_, err = u.dbConn.Exec(ctx, deleteSql, id)
 	if err != nil {
 		return errors.New(fmt.Sprint("Error deleting user: ", err))
 	}

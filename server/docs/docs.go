@@ -258,6 +258,205 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/v1/reminder": {
+            "put": {
+                "description": "update reminder",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Reminder"
+                ],
+                "summary": "This method update reminder",
+                "parameters": [
+                    {
+                        "description": "Handle Request Body",
+                        "name": "requestBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.ReminderUpdateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "post": {
+                "description": "save reminder",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Reminder"
+                ],
+                "summary": "This method save reminder",
+                "parameters": [
+                    {
+                        "description": "reminder",
+                        "name": "reminder",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.ReminderCreateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/api/v1/reminder/habit/{habitId}": {
+            "get": {
+                "description": "get all reminders by given habit id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Reminder"
+                ],
+                "summary": "This method get all reminders by given habit id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "habitId",
+                        "name": "habitId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/response.ReminderResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/api/v1/reminder/{id}": {
+            "get": {
+                "description": "get reminder by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Reminder"
+                ],
+                "summary": "This method get reminder by given id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.ReminderResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete reminder by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Reminder"
+                ],
+                "summary": "This method delete reminder by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
         "/api/v1/user": {
             "get": {
                 "description": "get all users",
@@ -368,7 +567,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/user/{userId}": {
+        "/api/v1/user/{id}": {
             "get": {
                 "description": "get user by id",
                 "consumes": [
@@ -384,8 +583,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "userId",
-                        "name": "userId",
+                        "description": "id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -423,8 +622,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "userId",
-                        "name": "userId",
+                        "description": "id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -449,6 +648,10 @@ const docTemplate = `{
     "definitions": {
         "request.HabitCreateRequest": {
             "type": "object",
+            "required": [
+                "name",
+                "userId"
+            ],
             "properties": {
                 "description": {
                     "type": "string"
@@ -463,6 +666,11 @@ const docTemplate = `{
         },
         "request.HabitUpdateRequest": {
             "type": "object",
+            "required": [
+                "description",
+                "id",
+                "name"
+            ],
             "properties": {
                 "description": {
                     "type": "string"
@@ -471,6 +679,34 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.ReminderCreateRequest": {
+            "type": "object",
+            "properties": {
+                "habitId": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "remindAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.ReminderUpdateRequest": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "remindAt": {
                     "type": "string"
                 }
             }
@@ -530,6 +766,23 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "userId": {
+                    "type": "string"
+                }
+            }
+        },
+        "response.ReminderResponse": {
+            "type": "object",
+            "properties": {
+                "habitId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "remindAt": {
                     "type": "string"
                 }
             }
